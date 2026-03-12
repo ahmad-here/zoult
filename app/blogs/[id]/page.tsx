@@ -1,6 +1,3 @@
-'use client'
-
-import { useParams } from 'next/navigation'
 import Navbar from '@/components/Navbar'
 import Header from '@/components/Header'
 import blogsData from '@/data/blogs.js'
@@ -9,10 +6,15 @@ import blog2 from '@/components/assets/blog2.jpg'
 import blog3 from '@/components/assets/blog3.jpg'
 import Bloglist from '@/components/Bloglist'
 
+// Generate static params for all blog IDs at build time
+export function generateStaticParams() {
+    return blogsData.map((blog) => ({
+        id: blog.blogid.toString(),
+    }))
+}
 
-export default function BlogDetail() {
-    const params = useParams()
-    const blogId = parseInt(params.id as string)
+export default function BlogDetail({ params }: { params: { id: string } }) {
+    const blogId = parseInt(params.id)
 
     // Find the blog by ID
     const blog = blogsData.find(b => b.blogid === blogId)
