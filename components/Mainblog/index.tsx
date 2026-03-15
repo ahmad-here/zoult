@@ -113,13 +113,13 @@ export default function Mainblog({ onBlogSelect }: MainblogProps) {
     // Navigate to individual blog page
     const handleBlogClick = () => {
         if (selectedBlog) {
-            router.push(`/blogs/${selectedBlog.blogid}`)
+            router.push(`/blogs/${selectedBlog.slug}`)
         }
     };
 
     return (
         <div
-            className="max-w-[700px] w-[80%] cursor-pointer group"
+            className="max-w-[600px] w-[80%] cursor-pointer group"
             onClick={handleBlogClick}
         >
             <h1 className="text-3xl font-bold mb-6 font-poppins transition-colors duration-300">
@@ -130,7 +130,7 @@ export default function Mainblog({ onBlogSelect }: MainblogProps) {
                 <img
                     src={getImageForBlog(selectedBlog.blogid)}
                     alt={selectedBlog.tittle}
-                    className="w-full h-auto group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-auto max-h-76 object-cover group-hover:scale-105 transition-transform duration-300"
                 />
             </div>
 

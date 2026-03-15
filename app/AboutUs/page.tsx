@@ -68,7 +68,8 @@ export default function AboutUs() {
                     </div>
                     <div className="flex-1">
                         <p className="text-xs  text-gray-700">
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                             a team of dedicated writers and technology enthusiasts who believe knowledge should be simple, useful, and accessible to everyone. Through this blog, I share ideas, insights, and practical guides designed to inform, inspire curiosity, and help readers learn something valuable every day.
+
                         </p>
                     </div>
                 </div>

@@ -1,41 +1,51 @@
 'use client'
 
-import { useRef, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import circles from '../assets/circles.png'
 import search from '../assets/search.svg'
-import science from '../assets/blog3.jpg'
-import travel from '../assets/blog2.jpg'
-import blogs from '../assets/blog1.jpg'
+import blog1 from '../assets/blog1.jpg'
+import blog2 from '../assets/blog2.jpg'
+import blog3 from '../assets/blog3.jpg'
+import Socialmedia from '../Socialmedia'
+import blogsData from '../../data/blogs.js'
+
+interface HeroBlogItem {
+    blogid: number
+    slug: string
+    tittle: string
+    catagory: string
+    content: string
+}
+
 export default function Herosection() {
     const router = useRouter()
+    const [gridItems, setGridItems] = useState<HeroBlogItem[]>([])
 
-    
+    const blogImages = [blog1.src, blog2.src, blog3.src]
 
-    // Sample data for the sliding grid
-    const gridItems = [
-        {
-            id: 1,
-            title: "Architecture",
-            subtitle: "The interior of the apartments.",
-            image: science.src,
-            category: "Interior Design"
-        },
-        {
-            id: 2,
-            title: "Modern Living",
-            subtitle: "Contemporary open spaces.",
-            image: travel.src,
-            category: "Architecture"
-        },
-        {
-            id: 3,
-            title: "Luxury Design",
-            subtitle: "Premium residential spaces.",
-            image: blogs.src,
-            category: "Luxury"
-        }
-    ]
+    const getImageForBlog = (blogid: number): string => {
+        const imageIndex = (blogid - 1) % blogImages.length
+        return blogImages[imageIndex]
+    }
+
+    const getPreviewText = (content: string, maxLength: number = 70): string => {
+        if (content.length <= maxLength) return content
+        return `${content.slice(0, maxLength).trimEnd()}...`
+    }
+
+    const getShortTitle = (title: string, maxLength: number = 25): string => {
+        if (title.length <= maxLength) return title
+        return `${title.slice(0, maxLength).trimEnd()}...`
+    }
+
+    useEffect(() => {
+        const randomizedBlogs = [...blogsData]
+            .sort(() => Math.random() - 0.5)
+            .slice(0, 3)
+
+        setGridItems(randomizedBlogs)
+    }, [])
 
     return (
         <section className="bg-white py-8 pr-0 font-poppins relative overflow-hidden">
@@ -60,14 +70,15 @@ export default function Herosection() {
                     >
                         {gridItems.map((item) => (
                             <div
-                                key={item.id}
+                                key={item.blogid}
                                 className="flex-shrink-0 w-80 group cursor-pointer"
+                                onClick={() => router.push(`/blogs/${item.slug}`)}
                             >
                                 {/* Image Container with Shadow */}
                                 <div className="relative h-48 overflow-hidden shadow-[-15px_10px_22px_-18px_rgba(0,_0,_0,_0.8)] hover:shadow-xl transition-all duration-300 rounded-lg mb-4">
                                     <img 
-                                        src={item.image} 
-                                        alt={item.title}
+                                        src={getImageForBlog(item.blogid)} 
+                                        alt={item.tittle}
                                         className="w-full h-full object-cover"
                                     />
                                     {/* Overlay on hover */}
@@ -80,14 +91,14 @@ export default function Herosection() {
                                 {/* Content - No Container */}
                                 <div className="">
                                     <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-[#0B5000] transition-colors duration-200">
-                                        {item.title}
+                                        {getShortTitle(item.tittle)}
                                     </h3>
                                     <p className="text-gray-600 text-sm mb-3">
-                                        {item.subtitle}
+                                        {getPreviewText(item.content)}
                                     </p>
                                     <div className="flex items-center justify-between">
                                         <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">
-                                            {item.category}
+                                            {item.catagory}
                                         </span>
                                         <svg className="w-4 h-4 text-gray-400 group-hover:text-[#0B5000] transition-colors duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -117,6 +128,8 @@ export default function Herosection() {
                 </div>
 
             </div>
+                  <Socialmedia className="mt-10 md:flex-col md:absolute md:bottom-10 md:left-20 md:space-y-6 md:items-start"/>
+
         </section>
     )
 }   

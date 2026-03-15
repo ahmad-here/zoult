@@ -7,6 +7,7 @@ export default function Navbar() {
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isServicesOpen, setIsServicesOpen] = useState(false)
+  const [isDesktopServicesOpen, setIsDesktopServicesOpen] = useState(false)
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
@@ -25,10 +26,60 @@ export default function Navbar() {
           OULT
         </div>
 
+        <ul className="hidden lg:flex items-center gap-8 text-lg font-medium text-gray-800">
+          <li className="cursor-pointer" onClick={() => router.push('/')}>Home</li>
+          <li className="cursor-pointer" onClick={() => router.push('/blogs')}>Blogs</li>
+          <li
+            className="relative"
+            onMouseEnter={() => setIsDesktopServicesOpen(true)}
+            onMouseLeave={() => setIsDesktopServicesOpen(false)}
+          >
+            <button
+              className="flex items-center gap-1 cursor-pointer"
+              type="button"
+              aria-haspopup="true"
+              aria-expanded={isDesktopServicesOpen}
+            >
+              Services
+              <svg
+                className={`w-4 h-4 transition-transform duration-200 ${isDesktopServicesOpen ? 'rotate-180' : ''}`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            <div className={`absolute top-full left-0 mt-3 w-56 bg-white shadow-xl rounded-xl py-3 transition-all duration-200 ${isDesktopServicesOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'}`}>
+              <button
+                className="w-full text-left px-4 py-2 text-gray-700"
+                onClick={() => router.push('/Jobs')}
+              >
+                Jobs
+              </button>
+              <button
+                className="w-full text-left px-4 py-2 text-gray-700"
+                onClick={() => router.push('/Movies')}
+              >
+                Movies
+              </button>
+              <button
+                className="w-full text-left px-4 py-2 text-gray-700"
+                onClick={() => router.push('/Websites')}
+              >
+                Useful Websites
+              </button>
+            </div>
+          </li>
+          <li className="cursor-pointer" onClick={() => router.push('/ContactUs')}>Contact Us</li>
+          <li className="cursor-pointer" onClick={() => router.push('/AboutUs')}>About</li>
+        </ul>
+
         {/* Hamburger Menu Button */}
         <button
           onClick={toggleMenu}
-          className="flex flex-col justify-center items-center w-8 h-8 space-y-1.5 focus:outline-none"
+          className="flex lg:hidden flex-col justify-center items-center w-8 h-8 space-y-1.5 focus:outline-none"
           aria-label="Menu"
         >
           <span className={`w-6 h-0.5 bg-gray-800 transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
@@ -38,7 +89,7 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile Menu */}
-      <div className={`fixed top-0 right-0 h-full w-80 bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out font-poppins ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+      <div className={`fixed lg:hidden top-0 right-0 h-full w-80 bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out font-poppins ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}>
         {/* Header with Logo and Close Button */}
         <div className="flex items-center justify-between p-6 border-b border-gray-100">
@@ -170,7 +221,7 @@ export default function Navbar() {
       {/* Overlay Background */}
       {isMenuOpen && (
         <div
-          className="fixed inset-0 z-40"
+          className="fixed lg:hidden inset-0 z-40"
           style={{ backgroundColor: 'rgba(0, 0, 0, 0.3)' }}
           onClick={toggleMenu}
         ></div>
