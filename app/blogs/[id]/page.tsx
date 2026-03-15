@@ -5,17 +5,6 @@ import blog1 from '@/components/assets/blog1.jpg'
 import blog2 from '@/components/assets/blog2.jpg'
 import blog3 from '@/components/assets/blog3.jpg'
 
-<<<<<<< Updated upstream
-// Generate static params for all blog IDs at build time
-export function generateStaticParams() {
-    return blogsData.map((blog) => ({
-        id: blog.blogid.toString(),
-    }))
-}
-
-export default function BlogDetail({ params }: { params: { id: string } }) {
-    const blogId = parseInt(params.id)
-=======
 export function generateStaticParams() {
     return blogsData.map((blog) => ({
         id: blog.slug,
@@ -24,7 +13,6 @@ export function generateStaticParams() {
 
 export default async function BlogDetail({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params
->>>>>>> Stashed changes
 
     const blog = blogsData.find((b: { slug: string }) => b.slug === id)
 
