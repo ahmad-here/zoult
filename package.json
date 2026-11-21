@@ -4,6 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "site-images": "node scripts/fetch-site-images.mjs",
+    "covers": "node scripts/generate-covers.mjs",
+    "prebuild": "node scripts/generate-covers.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"

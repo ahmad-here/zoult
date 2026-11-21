@@ -1,115 +1,57 @@
-'use client'
-import Socialmedia from "@/components/Socialmedia"
-import letterz from "@/components/assets/letterz.png"
-import ink from "@/components/assets/ink.png"
-import { useRouter } from "next/navigation"
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import Image from 'next/image'
+import letterz from '@/components/assets/letterz.png'
+import ink from '@/components/assets/ink.png'
+import { blogs, categories } from '@/data/blogs'
+import { SITE_NAME } from '@/lib/site'
+
+export const metadata: Metadata = {
+  title: 'About Us',
+  description:
+    'Learn about Zoult: who we are, what we write about, and how we research and update our guides on blogging, SEO, AI, web development and online careers.',
+  alternates: { canonical: '/about/' },
+}
 
 export default function AboutUs() {
-    const router = useRouter()
-    
-    return (
-        <>
-            <style jsx>{`
-                @keyframes wiggleArrow {
-                    0%, 100% {
-                        transform: translateX(0) translateY(-50%);
-                    }
-                    50% {
-                        transform: translateX(-6px) translateY(-50%);
-                    }
-                }
-                .animate-arrow {
-                    animation: wiggleArrow 1.5s ease-in-out infinite;
-                }
-            `}</style>
-            
-            {/* Header Section with Logo */}
-            <div className="bg-black px-6 py-20 font-[family-name:var(--font-poppins)] relative overflow-hidden">
-                <div className="relative flex items-center justify-center z-10">
-                    <img src={letterz.src} alt="Logo" className="w-23 h-22" />
-                    <span className="text-7xl font-bold text-gray-400 tracking-wider">OULT</span>
-                </div>
-                <img src={ink.src} alt="Ink" className="absolute top-20 left-60 w-62 h-62 object-cover z-0" />
-            </div>
+  return (
+    <>
+      <div className="bg-black px-6 py-16 relative overflow-hidden">
+        <div className="relative flex items-center justify-center z-10">
+          <Image src={letterz} alt="" width={92} height={88} className="w-16 md:w-23 h-auto" />
+          <h1 className="text-5xl md:text-7xl font-bold text-gray-400 tracking-wider">OULT</h1>
+        </div>
+        <Image src={ink} alt="" width={248} height={248} className="absolute top-10 left-1/2 -translate-x-[140%] w-48 md:w-62 h-auto object-cover z-0 opacity-80" aria-hidden="true" />
+      </div>
+      <div className="bg-[#B4E300] py-3 border-b-8 border-gray-700">
+        <p className="text-center text-black font-bold text-sm tracking-wide">ABOUT US</p>
+      </div>
 
-            {/* Get In Touch Section */}
-            <div className="bg-[#B4E300] py-2 border-b-8 border-gray-700 relative">
-                {/* Back Arrow Button */}
-                <button 
-                    onClick={() => router.push('/')}
-                    className="animate-arrow absolute left-4 top-1/2 w-10 h-10 bg-black rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors"
-                    aria-label="Back to home"
-                >
-                    <svg 
-                        width="20" 
-                        height="20" 
-                        viewBox="0 0 24 24" 
-                        fill="none" 
-                        stroke="white" 
-                        strokeWidth="2" 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round"
-                    >
-                        <path d="M19 12H5M12 19l-7-7 7-7"/>
-                    </svg>
-                </button>
-                
-                <p className="text-center text-black font-bold text-sm tracking-wide mb-3 font-[family-name:var(--font-poppins)]">
-                    GET IN TOUCH WITH US
-                </p>
-                <Socialmedia /> 
-            </div>
-
-            {/* We Are Section */}
-            <div className="w-[85%] md:w-[40%] justify-self-center py-8 bg-white font-[family-name:var(--font-poppins)]">
-                <div className="flex gap-4  items-center">
-                    <div className="text-4xl font-bold leading-tight text-right leading-[30px]">
-                        WE<br />ARE
-                    </div>
-                    <div className="flex-1">
-                        <p className="text-xs  text-gray-700">
-                             a team of dedicated writers and technology enthusiasts who believe knowledge should be simple, useful, and accessible to everyone. Through this blog, I share ideas, insights, and practical guides designed to inform, inspire curiosity, and help readers learn something valuable every day.
-
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            {/* Team Member Section */}
-            <div className="px-6 py-6 bg-white ">
-                <div className="text-center">
-                    <div className="w-24 h-24 bg-gray-300 rounded-full mx-auto mb-3"></div>
-                    <p className="font-medium text-lg font-[family-name:var(--font-poppins)]">Muhammad Ahmad</p>
-                    <p className="text-gray-600 text-sm font-[family-name:var(--font-poppins)]">Developer</p>
-                </div>
-            </div>
-
-            {/* Our Progress Section */}
-            <div className="px-6 py-8 bg-white font-[family-name:var(--font-poppins)]">
-                <h2 className="text-center text-3xl font-bold mb-10">
-                     <span className="text-[#B4E300]">OUR </span>PROGRESS
-                </h2>
-                <div className="space-y-15">
-                    <div className="text-center">
-                        <p className="text-4xl font-bold text-[#B4E300]">15+</p>
-                        <p className="text-xl font-bold mt-1">Articles</p>
-                    </div>
-                    <div className="text-center">
-                        <p className="text-4xl font-bold text-[#B4E300]">100+</p>
-                        <p className="text-xl font-bold mt-1">Visitors</p>
-                    </div>
-                </div>
-            </div>
-
-            {/* Contact Us Footer */}
-            <div className="bg-black py-6 border-t-4 border-[#B4E300] font-[family-name:var(--font-poppins)] cursor-pointer" onClick={() => {router.push('./ContactUs')}}>
-                <h2 className="text-center text-3xl font-bold">
-                    <span className="text-white">Contact </span>
-                    <span className="text-[#B4E300]">Us</span>
-                </h2>
-            </div>
-
-
-        </>
-    )
+      <div className="max-w-3xl mx-auto px-6 py-10 prose-zoult">
+        <h2>Who we are</h2>
+        <p>
+          {SITE_NAME} is an independent blog run by a small team of writers and developers who believe practical knowledge should be
+          simple, useful and free. We publish beginner-friendly guides that help readers start blogs, understand SEO, use AI tools
+          responsibly, stay safe online, learn web development and build careers or side income on the internet.
+        </p>
+        <h2>What we write about</h2>
+        <ul>
+          {categories.map((c) => <li key={c}>{c}</li>)}
+        </ul>
+        <h2>Our editorial standards</h2>
+        <p>
+          Every article is written from hands-on experience and research, reviewed for accuracy, and updated when tools or best
+          practices change. We avoid hype and unrealistic promises: if something takes time and effort, we say so. When we
+          mention third-party products or websites we do so because we think they are genuinely useful to readers.
+        </p>
+        <h2>Meet the team</h2>
+        <p><strong>Muhammad Ahmad</strong> – Founder &amp; Developer. Builds and maintains the site and writes about web development and SEO.</p>
+        <h2>Our progress</h2>
+        <p><strong>{blogs.length}</strong> in-depth articles across <strong>{categories.length}</strong> topics, and growing every month.</p>
+        <p>
+          Have a question, correction or topic suggestion? <Link href="/contact/">Contact us</Link> – we read every message.
+        </p>
+      </div>
+    </>
+  )
 }
