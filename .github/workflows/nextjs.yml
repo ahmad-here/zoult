@@ -74,7 +74,7 @@ jobs:
           # With a custom domain base_path is empty. Set repository variables in
           # Settings > Secrets and variables > Actions > Variables.
           NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
-          NEXT_PUBLIC_SITE_URL: ${{ vars.SITE_URL || steps.pages.outputs.base_url }}
+          NEXT_PUBLIC_SITE_URL: ${{ vars.SITE_URL || 'https://zoult.wasmer.app' }}
           NEXT_PUBLIC_ADSENSE_CLIENT: ${{ vars.ADSENSE_CLIENT }}
           NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION: ${{ vars.GOOGLE_SITE_VERIFICATION }}
           NEXT_PUBLIC_CONTACT_EMAIL: ${{ vars.CONTACT_EMAIL }}
